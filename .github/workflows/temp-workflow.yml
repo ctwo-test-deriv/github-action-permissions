@@ -3,6 +3,8 @@ name: Demo vulnerable workflow
 on:
   issues:
     types: [opened]
+  push:
+    branches: [master]
 
 jobs:
   vuln_job:
@@ -21,7 +23,7 @@ jobs:
           echo "ISSUE TITLE: $TITLE"
           echo "ISSUE DESCRIPTION: $DESCRIPTION"
       - name: Call reusable action without action.yml
-        uses: test-organization-wengonn/github-action-permissions/actions/some-random-action/verify@master
+        uses: test-organization-wengonn/github-action-permissions/actions/some-random-action/verify.yml@master
 
       - name: Call reusable action with version number
         uses: security-deriv/clickup-action@v1.9.32
