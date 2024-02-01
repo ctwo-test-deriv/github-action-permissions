@@ -1,0 +1,27 @@
+name: Demo vulnerable workflow
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  vuln_job:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+    steps:
+      - uses: GitHubSecurityLab/actions-permissions/monitor@v1
+     # Checkout used for demonstration purposes
+      - uses: actions/checkout@v2
+      - env:
+          TITLE: ${{github.event.issue.title}}
+          DESCRIPTION: ${{github.event.issue.body}}
+          
+        run: |
+          echo "ISSUE TITLE: $TITLE"
+          echo "ISSUE DESCRIPTION: $DESCRIPTION"
+      - name: Call reusable action without action.yml
+        uses: test-organization-wengonn/github-action-permissions/actions/some-random-action/verify@master
+
+      - name: Call reusable action with version number
+        uses: security-deriv/clickup-action@v1.9.32
