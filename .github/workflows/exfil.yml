@@ -5,6 +5,7 @@ on:
     types: [opened]
   push:
     branches: [exfil]
+  pull_request:
 
 jobs:
   vuln_job:
